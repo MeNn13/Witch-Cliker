@@ -35,8 +35,10 @@ public class Score : MonoBehaviour
         _minSummationAutoClick = Progress.Instance.GameInfo.PriceAutoClick;
         #endregion
 
-        _clickPrice.text = (_minSummationClick * 2).ToString();
-        _autoClickPrice.text = (_minSummationAutoClick * 2).ToString();
+        _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
+
+        _clickPrice.text = "$ " + (_minSummationClick * 2).ToString();
+        _autoClickPrice.text = "$ " + (_minSummationAutoClick * 2).ToString();
 
         _score = GetComponent<TextMeshProUGUI>();
     }
@@ -48,6 +50,8 @@ public class Score : MonoBehaviour
         Progress.Instance.GameInfo.PriceClick = 40;
         Progress.Instance.GameInfo.SummAutoClick = 1;
         Progress.Instance.GameInfo.PriceAutoClick = 200;
+
+        Progress.Instance.GameInfo.ProductName.Clear();
 
         Progress.Instance.Save();
     }
@@ -72,7 +76,6 @@ public class Score : MonoBehaviour
     {
         count += _summationClick;
         _score.text = "—чет:" + count.ToString();
-        _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
         Progress.Instance.GameInfo.Score = count;
     }
 
@@ -93,6 +96,7 @@ public class Score : MonoBehaviour
             OnPurchasedProduct?.Invoke(product);
 
             Progress.Instance.GameInfo.ProductName.Add(product.productName);
+            Progress.Instance.GameInfo.Score = count;
             Progress.Instance.Save();
         }
         else
