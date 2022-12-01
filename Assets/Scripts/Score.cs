@@ -43,7 +43,6 @@ public class Score : MonoBehaviour
 
     public void Zero()
     {
-        return;
         Progress.Instance.GameInfo.Score = 0;
         Progress.Instance.GameInfo.SummClick = 1;
         Progress.Instance.GameInfo.PriceClick = 40;
@@ -92,6 +91,9 @@ public class Score : MonoBehaviour
             _score.text = "—чет:" + count.ToString();
 
             OnPurchasedProduct?.Invoke(product);
+
+            Progress.Instance.GameInfo.ProductName.Add(product.productName);
+            Progress.Instance.Save();
         }
         else
             _notEnoughCountUI.SetActive(true);

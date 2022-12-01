@@ -1411,7 +1411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: GameInfo.SummClick
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: GameInfo.PriceClick
@@ -1424,6 +1424,14 @@ PrefabInstance:
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: GameInfo.PriceAutoClick
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
+      propertyPath: GameInfo.ProductName.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
+      propertyPath: GameInfo.ProductName.Array.data[0]
+      value: "\u0417\u0435\u043B\u044C\u044F"
       objectReference: {fileID: 0}
     - target: {fileID: 7482677746245899231, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: m_Name

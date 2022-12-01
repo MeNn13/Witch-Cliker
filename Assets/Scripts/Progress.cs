@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class GameInfo
     public ulong PriceClick;
     public ulong SummAutoClick;
     public ulong PriceAutoClick;
+
+    public List<string> ProductName;
 }
 
 public class Progress : MonoBehaviour
