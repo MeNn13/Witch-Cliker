@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
     [SerializeField] private GameObject _notEnoughCountUI;
     private TextMeshProUGUI _score;
     [SerializeField] private ulong count = 0;
+    [SerializeField] private TextMeshProUGUI _forcePunch;
 
     [Header(" лик")]
     #region Click Variables
@@ -26,13 +27,30 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
+        #region Initialization Variables
         count = Progress.Instance.GameInfo.Score;
         _summationClick = Progress.Instance.GameInfo.SummClick;
         _summationAutoClick = Progress.Instance.GameInfo.SummAutoClick;
         _minSummationClick = Progress.Instance.GameInfo.PriceClick;
         _minSummationAutoClick = Progress.Instance.GameInfo.PriceAutoClick;
+        #endregion
+
+        _clickPrice.text = (_minSummationClick * 2).ToString();
+        _autoClickPrice.text = (_minSummationAutoClick * 2).ToString();
 
         _score = GetComponent<TextMeshProUGUI>();
+    }
+
+    public void Zero()
+    {
+        return;
+        Progress.Instance.GameInfo.Score = 0;
+        Progress.Instance.GameInfo.SummClick = 1;
+        Progress.Instance.GameInfo.PriceClick = 40;
+        Progress.Instance.GameInfo.SummAutoClick = 1;
+        Progress.Instance.GameInfo.PriceAutoClick = 200;
+
+        Progress.Instance.Save();
     }
 
     private void OnEnable()
@@ -55,6 +73,7 @@ public class Score : MonoBehaviour
     {
         count += _summationClick;
         _score.text = "—чет:" + count.ToString();
+        _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
         Progress.Instance.GameInfo.Score = count;
     }
 

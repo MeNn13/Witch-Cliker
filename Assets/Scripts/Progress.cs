@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,8 +14,6 @@ public class GameInfo
 public class Progress : MonoBehaviour
 {
     public GameInfo GameInfo;
-
-    [SerializeField] private TextMeshProUGUI _textMeshPro;
 
     [DllImport("__Internal")]
     private static extern void SaveExtern(string data);
@@ -48,6 +45,5 @@ public class Progress : MonoBehaviour
     public void SetDataInfo(string value)
     {
         GameInfo = JsonUtility.FromJson<GameInfo>(value);
-        _textMeshPro.text = GameInfo.Score + "\n" + GameInfo.PriceClick + "\n" + GameInfo.SummClick + "\n" + GameInfo.PriceAutoClick + "\n" + GameInfo.SummAutoClick + "\n";
     }
 }
