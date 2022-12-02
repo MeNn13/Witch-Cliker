@@ -17,4 +17,17 @@ mergeInto(LibraryManager.library, {
             myGameInstance.SendMessage('Progress', 'SetDataInfo', myJson)
         })
     },
+
+    ShowFullAd: function(){
+        ysdk.adv.showFullscreenAdv({
+            callbacks: {
+                onClose: function(wasShown) {
+                  // some action after close
+                },
+                onError: function(error) {
+                  // some action on error
+                }
+            }
+        })
+    },
 });

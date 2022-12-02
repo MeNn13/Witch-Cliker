@@ -13,8 +13,12 @@ public class Yandex : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void GetPlayerData();
 
+    [DllImport("__Internal")]
+    private static extern void ShowFullAd();
+
     public void Start()
     {
+        ShowFullAd();
         GetPlayerData();
     }
 

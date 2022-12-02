@@ -4,10 +4,12 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private Image _healthBar;
+    public static Action OnDying;
 
+    [SerializeField] private Image _healthBar;
+    
     [SerializeField]
-    private int _maxHealth = 200;
+    private int _maxHealth = 200; 
 
     private int _currentHealth;
 
@@ -24,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     private void Start()
-    {
+    {     
         _currentHealth = _maxHealth;
     }
 
@@ -32,6 +34,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
+            OnDying?.Invoke();
+
             _currentHealth = _maxHealth;
 #if UNITY_WEBGL
             Progress.Instance.Save();
@@ -47,6 +51,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
+            OnDying?.Invoke();
+
             _currentHealth = _maxHealth;
 #if UNITY_WEBGL
             Progress.Instance.Save();
