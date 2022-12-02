@@ -3,8 +3,8 @@ using UnityEngine;
 public class Dying : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider _collider;
-
-    private Animator _enemyAnim;
+    [SerializeField] private GameObject _enemyResurrection;
+    [SerializeField] private AudioSource _audioResurrection;
 
     private void OnEnable()
     {
@@ -16,14 +16,9 @@ public class Dying : MonoBehaviour
         EnemyHealth.OnDying -= DyingOfEnemy;
     }
 
-    private void Start()
-    {
-        _enemyAnim = GetComponent<Animator>();
-    }
-
     private void DyingOfEnemy()
     {
-        _enemyAnim.SetBool("isDie", true);
-        _collider.enabled = false;       
+        Instantiate(_enemyResurrection);
+        _audioResurrection.Play();
     }
 }

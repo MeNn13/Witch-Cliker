@@ -37,6 +37,8 @@ public class EnemyHealth : MonoBehaviour
             OnDying?.Invoke();
 
             _currentHealth = _maxHealth;
+            _healthBar.fillAmount = (float)_currentHealth / _maxHealth;
+
 #if UNITY_WEBGL
             Progress.Instance.Save();
 #endif
@@ -54,6 +56,8 @@ public class EnemyHealth : MonoBehaviour
             OnDying?.Invoke();
 
             _currentHealth = _maxHealth;
+            _healthBar.fillAmount = (float)_currentHealth / _maxHealth;
+
 #if UNITY_WEBGL
             Progress.Instance.Save();
 #endif
