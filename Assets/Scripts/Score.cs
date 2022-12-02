@@ -126,6 +126,8 @@ public class Score : MonoBehaviour
             Progress.Instance.GameInfo.SummClick = _summationClick;
             Progress.Instance.GameInfo.PriceClick = summWithProcent;
             Progress.Instance.GameInfo.Score = count;
+
+            _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
         }
         else
             _notEnoughCountUI.SetActive(true);
@@ -145,6 +147,8 @@ public class Score : MonoBehaviour
             Progress.Instance.GameInfo.SummAutoClick = _summationAutoClick;
             Progress.Instance.GameInfo.PriceAutoClick = summWithProcent;
             Progress.Instance.GameInfo.Score = count;
+
+            _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
         }
         else
             _notEnoughCountUI.SetActive(true);
