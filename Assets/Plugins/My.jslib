@@ -30,4 +30,24 @@ mergeInto(LibraryManager.library, {
             }
         })
     },
+
+    ShowAdsExtern: function(){
+        ysdk.adv.showRewardedVideo({
+            callbacks: {
+                onOpen: () => {
+                  console.log('Video ad open.');
+                },
+                onRewarded: () => {
+                  console.log('Rewarded!');
+                  myGameInstance.SendMessage("ADS", "MultiplierClicks");
+                },
+                onClose: () => {
+                  console.log('Video ad closed.');
+                }, 
+                onError: (e) => {
+                  console.log('Error while open video ad:', e);
+                }
+            }
+        })
+    },
 });

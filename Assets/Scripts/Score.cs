@@ -25,6 +25,8 @@ public class Score : MonoBehaviour
     private ulong _minSummationAutoClick = 200;
     #endregion
 
+    private byte _multiplier = 1;
+
     private void Start()
     {
         #region Initialization Variables
@@ -62,6 +64,11 @@ public class Score : MonoBehaviour
         AutoClick.OnAutoClick += ScoreAutoClick;
         Buy.OnBuyProduct += BuyProduct;
         Upgrade.OnUpgrade += UpgradeClicks;
+
+        #region ADS Events
+        ADS.OnAdsMultiplier += MultiplierClicks;
+        ADS.UnAdsMultiplier += UnMultiplierClicks;
+        #endregion
     }
 
     private void OnDisable()
@@ -70,18 +77,23 @@ public class Score : MonoBehaviour
         AutoClick.OnAutoClick -= ScoreAutoClick;
         Buy.OnBuyProduct -= BuyProduct;
         Upgrade.OnUpgrade -= UpgradeClicks;
+
+        #region ADS Events
+        ADS.OnAdsMultiplier -= MultiplierClicks;
+        ADS.UnAdsMultiplier -= UnMultiplierClicks;
+        #endregion
     }
 
     private void ScoreClickUp()
     {
-        count += _summationClick;
+        count += _summationClick * _multiplier;
         _score.text = "—чет:" + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
 
     private void ScoreAutoClick()
     {
-        count += _summationAutoClick;
+        count += _summationAutoClick * _multiplier;
         _score.text = "—чет:" + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
@@ -152,5 +164,17 @@ public class Score : MonoBehaviour
         }
         else
             _notEnoughCountUI.SetActive(true);
+    }
+
+    private void MultiplierClicks()
+    {
+        _forcePunch.color = Color.red;
+        _multiplier = 2;
+    }
+
+    private void UnMultiplierClicks()
+    {
+        _forcePunch.color = _score.color;
+        _multiplier = 1;
     }
 }

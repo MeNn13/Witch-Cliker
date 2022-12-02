@@ -249,8 +249,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nickname
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 14484f463b584c842a241afddb0312d1, type: 2}
+  m_sharedMaterial: {fileID: 5807987002395060203, guid: 14484f463b584c842a241afddb0312d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1407,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: GameInfo.Score
-      value: 0
+      value: 5000000
       objectReference: {fileID: 0}
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: GameInfo.SummClick

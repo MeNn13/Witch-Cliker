@@ -132,10 +132,10 @@ TextureImporter:
       name: Halloween_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 700
-        width: 1044
-        height: 214
+        x: 1085
+        y: 446
+        width: 309
+        height: 289
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22bcb425911950947b9a2b95930b8a54
-      internalID: 82641033
+      spriteID: 6d3578a8cd5a7624896f11bed0f99a2e
+      internalID: -821580137
       vertices: []
       indices: 
       edges: []
@@ -153,10 +153,10 @@ TextureImporter:
       name: Halloween_1
       rect:
         serializedVersion: 2
-        x: 56
-        y: 123
-        width: 732
-        height: 530
+        x: 0
+        y: 684
+        width: 1047
+        height: 235
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,8 +164,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 608cfb515f9e2104ba161362226484e5
-      internalID: -89596826
+      spriteID: 3426ad87146d88244b352bdd7e434d15
+      internalID: -1377840651
       vertices: []
       indices: 
       edges: []
@@ -174,10 +174,10 @@ TextureImporter:
       name: Halloween_2
       rect:
         serializedVersion: 2
-        x: 885
-        y: 272
-        width: 193
-        height: 180
+        x: 785
+        y: 281
+        width: 191
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,8 +185,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6441031e989437943a1912f0c624f46a
-      internalID: 621077108
+      spriteID: 4296461aeb90f6048839851d83f2e008
+      internalID: 939050970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Halloween_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 125
+        width: 709
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5897d0fac0e97ba4cb145d45ec5887ed
+      internalID: 1032950431
       vertices: []
       indices: 
       edges: []
@@ -194,7 +215,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 59de8625533f51748b0f2032f8843b45
+    spriteID: 9b2427cee7bcd4445b352af15dd887a3
     internalID: 0
     vertices: []
     indices: 
@@ -202,9 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Halloween_1: 580283815
-      Halloween_2: 1015822129
-      Halloween_0: -62213358
+      Halloween_1: -1377840651
+      Halloween_2: 939050970
+      Halloween_3: 1032950431
+      Halloween_0: -821580137
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
