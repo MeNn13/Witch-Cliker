@@ -1402,6 +1402,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
+      propertyPath: score
+      value: 50000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406803994271003630, guid: 210476ac19cce0c48b27717eb61b72c8, type: 3}
       propertyPath: _textMeshPro
       value: 
       objectReference: {fileID: 0}

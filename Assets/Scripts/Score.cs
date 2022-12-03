@@ -19,15 +19,15 @@ public class Score : MonoBehaviour
     [Header(" лик")]
     #region Click Variables
     [SerializeField] private TextMeshProUGUI _clickPrice;
-    private ulong _summationClick = 1;
-    private ulong _minSummationClick = 40;
+    private byte _summationClick = 1;
+    private int _minSummationClick = 40;
     #endregion
 
     [Header("јвто-клик")]
     #region AutoClick Variable
     [SerializeField] private TextMeshProUGUI _autoClickPrice;
-    private ulong _summationAutoClick = 1;
-    private ulong _minSummationAutoClick = 200;
+    private byte _summationAutoClick = 1;
+    private int _minSummationAutoClick = 200;
     #endregion
 
     private byte _multiplier = 1;
@@ -61,10 +61,11 @@ public class Score : MonoBehaviour
     public void Zero()
     {
         Progress.Instance.GameInfo.Score = 0;
-        Progress.Instance.GameInfo.SummClick = 1;
-        Progress.Instance.GameInfo.PriceClick = 40;
-        Progress.Instance.GameInfo.SummAutoClick = 1;
-        Progress.Instance.GameInfo.PriceAutoClick = 200;
+        Progress.Instance.GameInfo.SummClick = 0;
+        Progress.Instance.GameInfo.PriceClick = 0;
+        Progress.Instance.GameInfo.SummAutoClick = 0;
+        Progress.Instance.GameInfo.PriceAutoClick = 0;
+        Progress.Instance.GameInfo.Level = 0;
 
         Progress.Instance.GameInfo.ProductName.Clear();
 
@@ -101,14 +102,14 @@ public class Score : MonoBehaviour
 
     private void ScoreClickUp()
     {
-        count += _summationClick * _multiplier;
+        count += (ulong)_summationClick * _multiplier;
         _score.text = "—чет:" + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
 
     private void ScoreAutoClick()
     {
-        count += _summationAutoClick * _multiplier;
+        count += (ulong)_summationAutoClick * _multiplier;
         _score.text = "—чет:" + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
@@ -147,12 +148,12 @@ public class Score : MonoBehaviour
 
     private void UpgradeClick()
     {
-        ulong summWithProcent = _minSummationClick * 2;
+        int summWithProcent = _minSummationClick * 2;
 
         if (_summationClick != 10)
-            if (count >= summWithProcent)
+            if (count >= (ulong)summWithProcent)
             {
-                count -= summWithProcent;
+                count -= (ulong)summWithProcent;
                 _score.text = "—чет:" + count.ToString();
                 _minSummationClick = summWithProcent;
                 _clickPrice.text = "$ " + (summWithProcent * 2).ToString();
@@ -172,12 +173,12 @@ public class Score : MonoBehaviour
 
     private void UpgradeAutoClick()
     {
-        ulong summWithProcent = _minSummationAutoClick * 2;
+        int summWithProcent = _minSummationAutoClick * 2;
 
         if (_summationAutoClick != 10)
-            if (count >= summWithProcent)
+            if (count >= (ulong)summWithProcent)
             {
-                count -= summWithProcent;
+                count -= (ulong)summWithProcent;
                 _score.text = "—чет:" + count.ToString();
                 _minSummationAutoClick = summWithProcent;
                 _autoClickPrice.text = "$ " + (summWithProcent * 2).ToString();
