@@ -10,7 +10,7 @@ public class GameInfo
     public ulong PriceClick;
     public ulong SummAutoClick;
     public ulong PriceAutoClick;
-
+    public byte Level;
     public List<string> ProductName;
 }
 

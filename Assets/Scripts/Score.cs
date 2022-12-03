@@ -1,15 +1,20 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public static Action<ProductData> OnPurchasedProduct;
 
-    [SerializeField] private GameObject _notEnoughCountUI;
     private TextMeshProUGUI _score;
     [SerializeField] private ulong count = 0;
+
+    [Header("UI")]
+    [SerializeField] private Button[] _buttons;
+    [SerializeField] private GameObject _levelPanel;
     [SerializeField] private TextMeshProUGUI _forcePunch;
+    [SerializeField] private GameObject _notEnoughCountUI;
 
     [Header(" лик")]
     #region Click Variables
@@ -42,7 +47,15 @@ public class Score : MonoBehaviour
         _clickPrice.text = "$ " + (_minSummationClick * 2).ToString();
         _autoClickPrice.text = "$ " + (_minSummationAutoClick * 2).ToString();
 
+        CheckLevel();
+
         _score = GetComponent<TextMeshProUGUI>();
+    }
+
+    private void CheckLevel()
+    {
+        if (_summationClick == 10 && _summationAutoClick == 10 && Progress.Instance.GameInfo.Level != 10)
+            _levelPanel.SetActive(true);
     }
 
     public void Zero()
@@ -64,6 +77,7 @@ public class Score : MonoBehaviour
         AutoClick.OnAutoClick += ScoreAutoClick;
         Buy.OnBuyProduct += BuyProduct;
         Upgrade.OnUpgrade += UpgradeClicks;
+        Level.OnLevelUp += SummClicksUpdate;
 
         #region ADS Events
         ADS.OnAdsMultiplier += MultiplierClicks;
@@ -77,6 +91,7 @@ public class Score : MonoBehaviour
         AutoClick.OnAutoClick -= ScoreAutoClick;
         Buy.OnBuyProduct -= BuyProduct;
         Upgrade.OnUpgrade -= UpgradeClicks;
+        Level.OnLevelUp -= SummClicksUpdate;
 
         #region ADS Events
         ADS.OnAdsMultiplier -= MultiplierClicks;
@@ -119,51 +134,65 @@ public class Score : MonoBehaviour
     private void UpgradeClicks(UpgradeItem item)
     {
         if (item == UpgradeItem.Click)
+        {
+            CheckLevel();
             UpgradeClick();
+        }
         else
+        {
+            CheckLevel();
             UpgradeAutoClick();
+        }
     }
 
     private void UpgradeClick()
     {
         ulong summWithProcent = _minSummationClick * 2;
-        if (count >= summWithProcent)
-        {
-            count -= summWithProcent;
-            _score.text = "—чет:" + count.ToString();
-            _minSummationClick = summWithProcent;
-            _clickPrice.text = "$ " + (summWithProcent * 2).ToString();
-            _summationClick++;
 
-            Progress.Instance.GameInfo.SummClick = _summationClick;
-            Progress.Instance.GameInfo.PriceClick = summWithProcent;
-            Progress.Instance.GameInfo.Score = count;
+        if (_summationClick != 10)
+            if (count >= summWithProcent)
+            {
+                count -= summWithProcent;
+                _score.text = "—чет:" + count.ToString();
+                _minSummationClick = summWithProcent;
+                _clickPrice.text = "$ " + (summWithProcent * 2).ToString();
+                _summationClick++;
 
-            _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
-        }
+                Progress.Instance.GameInfo.SummClick = _summationClick;
+                Progress.Instance.GameInfo.PriceClick = summWithProcent;
+                Progress.Instance.GameInfo.Score = count;
+
+                _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
+            }
+            else
+                _notEnoughCountUI.SetActive(true);
         else
-            _notEnoughCountUI.SetActive(true);
+            _buttons[0].interactable = false;
     }
 
     private void UpgradeAutoClick()
     {
         ulong summWithProcent = _minSummationAutoClick * 2;
-        if (count >= summWithProcent)
-        {
-            count -= summWithProcent;
-            _score.text = "—чет:" + count.ToString();
-            _minSummationAutoClick = summWithProcent;
-            _autoClickPrice.text = "$ " + (summWithProcent * 2).ToString();
-            _summationAutoClick++;
 
-            Progress.Instance.GameInfo.SummAutoClick = _summationAutoClick;
-            Progress.Instance.GameInfo.PriceAutoClick = summWithProcent;
-            Progress.Instance.GameInfo.Score = count;
+        if (_summationAutoClick != 10)
+            if (count >= summWithProcent)
+            {
+                count -= summWithProcent;
+                _score.text = "—чет:" + count.ToString();
+                _minSummationAutoClick = summWithProcent;
+                _autoClickPrice.text = "$ " + (summWithProcent * 2).ToString();
+                _summationAutoClick++;
 
-            _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
-        }
+                Progress.Instance.GameInfo.SummAutoClick = _summationAutoClick;
+                Progress.Instance.GameInfo.PriceAutoClick = summWithProcent;
+                Progress.Instance.GameInfo.Score = count;
+
+                _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
+            }
+            else
+                _notEnoughCountUI.SetActive(true);
         else
-            _notEnoughCountUI.SetActive(true);
+            _buttons[1].interactable = false;
     }
 
     private void MultiplierClicks()
@@ -176,5 +205,28 @@ public class Score : MonoBehaviour
     {
         _forcePunch.color = _score.color;
         _multiplier = 1;
+    }
+
+    private void SummClicksUpdate()
+    {
+        _summationClick = 1;
+        _summationAutoClick = 1;
+        Progress.Instance.GameInfo.SummClick = _summationClick;
+        Progress.Instance.GameInfo.SummAutoClick = _summationAutoClick;
+
+        _buttons[0].interactable = true;
+        _buttons[1].interactable = true;
+
+        _minSummationClick = 40;
+        _minSummationAutoClick = 200;
+
+        Progress.Instance.GameInfo.PriceClick = _minSummationClick;
+        Progress.Instance.GameInfo.PriceAutoClick = _minSummationAutoClick;
+
+        _clickPrice.text = "$ " + (_minSummationClick * 2).ToString();
+        _autoClickPrice.text = "$ " + (_minSummationAutoClick * 2).ToString();
+        _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
+
+        Progress.Instance.Save();
     }
 }
