@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0fff8abf11c3a9f46bc23ee2095ec89a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _fontAssetDefault: {fileID: 11400000, guid: 14484f463b584c842a241afddb0312d1, type: 2}
+  - _fontAssetChina: {fileID: 11400000, guid: a000b43e54cdd8641a106e54165fcabb, type: 2}
+  - _fontAssetJapan: {fileID: 11400000, guid: cb59415499fdf144d9fcebeed3186594, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

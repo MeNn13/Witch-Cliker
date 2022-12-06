@@ -31,6 +31,7 @@ public class Score : MonoBehaviour
     #endregion
 
     private byte _multiplier = 1;
+    private string _countText;
 
     private void Start()
     {
@@ -47,9 +48,10 @@ public class Score : MonoBehaviour
         _clickPrice.text = "$ " + (_minSummationClick * 2).ToString();
         _autoClickPrice.text = "$ " + (_minSummationAutoClick * 2).ToString();
 
-        CheckLevel();
-
         _score = GetComponent<TextMeshProUGUI>();
+        _countText = _score.text;
+
+        CheckLevel();  
     }
 
     private void CheckLevel()
@@ -103,14 +105,14 @@ public class Score : MonoBehaviour
     private void ScoreClickUp()
     {
         count += (ulong)_summationClick * _multiplier;
-        _score.text = "—чет:" + count.ToString();
+        _score.text = _countText + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
 
     private void ScoreAutoClick()
     {
         count += (ulong)_summationAutoClick * _multiplier;
-        _score.text = "—чет:" + count.ToString();
+        _score.text = _countText + count.ToString();
         Progress.Instance.GameInfo.Score = count;
     }
 
@@ -119,7 +121,7 @@ public class Score : MonoBehaviour
         if (count >= product.price)
         {
             count -= product.price;
-            _score.text = "—чет:" + count.ToString();
+            _score.text = _countText + count.ToString();
 
             OnPurchasedProduct?.Invoke(product);
 
@@ -154,7 +156,7 @@ public class Score : MonoBehaviour
             if (count >= (ulong)summWithProcent)
             {
                 count -= (ulong)summWithProcent;
-                _score.text = "—чет:" + count.ToString();
+                _score.text = _countText + count.ToString();
                 _minSummationClick = summWithProcent;
                 _clickPrice.text = "$ " + (summWithProcent * 2).ToString();
                 _summationClick++;
@@ -163,6 +165,7 @@ public class Score : MonoBehaviour
                 Progress.Instance.GameInfo.PriceClick = summWithProcent;
                 Progress.Instance.GameInfo.Score = count;
 
+                Progress.Instance.Save();
                 _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
             }
             else
@@ -179,7 +182,7 @@ public class Score : MonoBehaviour
             if (count >= (ulong)summWithProcent)
             {
                 count -= (ulong)summWithProcent;
-                _score.text = "—чет:" + count.ToString();
+                _score.text = _countText + count.ToString();
                 _minSummationAutoClick = summWithProcent;
                 _autoClickPrice.text = "$ " + (summWithProcent * 2).ToString();
                 _summationAutoClick++;
@@ -187,6 +190,8 @@ public class Score : MonoBehaviour
                 Progress.Instance.GameInfo.SummAutoClick = _summationAutoClick;
                 Progress.Instance.GameInfo.PriceAutoClick = summWithProcent;
                 Progress.Instance.GameInfo.Score = count;
+
+                Progress.Instance.Save();
 
                 _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
             }

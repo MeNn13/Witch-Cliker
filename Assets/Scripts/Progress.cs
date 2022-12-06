@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -94,7 +95,7 @@ public class GameInfo
         }
         set
         {
-            if (value < 1 && value > 10)
+            if (value < 1 || value > 10)
                 level = 1;
             else
                 level = value;
@@ -123,6 +124,7 @@ public class Progress : MonoBehaviour
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            //Load();
             LoadExtern();
         }
         else
@@ -131,12 +133,19 @@ public class Progress : MonoBehaviour
 
     public void Save()
     {
-        string jsonString = JsonUtility.ToJson(GameInfo);
-        SaveExtern(jsonString);
+        string jsonString1 = JsonConvert.SerializeObject(GameInfo);
+        //PlayerPrefs.SetString("GameData", jsonString1);
+        SaveExtern(jsonString1);
+    }
+
+    public void Load()
+    {
+        //GameInfo = JsonUtility.FromJson<GameInfo>(PlayerPrefs.GetString("GameData"));
+        GameInfo = JsonConvert.DeserializeObject<GameInfo>(PlayerPrefs.GetString("GameData"));
     }
 
     public void SetDataInfo(string value)
     {
-        GameInfo = JsonUtility.FromJson<GameInfo>(value);
+        GameInfo = JsonConvert.DeserializeObject<GameInfo>(value);
     }
 }
