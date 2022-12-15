@@ -51,7 +51,7 @@ public class Score : MonoBehaviour
         _score = GetComponent<TextMeshProUGUI>();
         _countText = _score.text;
 
-        CheckLevel();  
+        CheckLevel();
     }
 
     private void CheckLevel()
@@ -81,6 +81,8 @@ public class Score : MonoBehaviour
         Buy.OnBuyProduct += BuyProduct;
         Upgrade.OnUpgrade += UpgradeClicks;
         Level.OnLevelUp += SummClicksUpdate;
+        EnemyHealth.OnDying += ScorePlus;
+        EnemyHealth.OnDyingBoss += KillBoss;
 
         #region ADS Events
         ADS.OnAdsMultiplier += MultiplierClicks;
@@ -95,6 +97,8 @@ public class Score : MonoBehaviour
         Buy.OnBuyProduct -= BuyProduct;
         Upgrade.OnUpgrade -= UpgradeClicks;
         Level.OnLevelUp -= SummClicksUpdate;
+        EnemyHealth.OnDying -= ScorePlus;
+        EnemyHealth.OnDyingBoss -= KillBoss;
 
         #region ADS Events
         ADS.OnAdsMultiplier -= MultiplierClicks;
@@ -233,6 +237,19 @@ public class Score : MonoBehaviour
         _autoClickPrice.text = "$ " + (_minSummationAutoClick * 2).ToString();
         _forcePunch.text = Progress.Instance.GameInfo.SummClick + "\n" + Progress.Instance.GameInfo.SummAutoClick + "\n";
 
+        Progress.Instance.Save();
+    }
+
+    private void ScorePlus()
+    {
+        count += 100;
+        Progress.Instance.GameInfo.Score = count;
+    }
+
+    private void KillBoss()
+    {
+        count += Convert.ToUInt16(500 + (2 * Progress.Instance.GameInfo.Level));
+        Progress.Instance.GameInfo.Score = count;
         Progress.Instance.Save();
     }
 }

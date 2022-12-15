@@ -7,6 +7,10 @@ public class DictionaryText : MonoBehaviour
     Dictionary<byte, string> dictionary = new();
 
     [SerializeField] private string[] _translate;
+
+    [Header("״נטפעû")]
+    [SerializeField] private bool _isWrapForCnJp = false;
+    [SerializeField] private float _fontSizeDefault = 18.0f;
     [SerializeField] private TMP_FontAsset _fontAssetDefault;
     [SerializeField] private TMP_FontAsset _fontAssetChina;
     [SerializeField] private TMP_FontAsset _fontAssetJapan;
@@ -45,15 +49,17 @@ public class DictionaryText : MonoBehaviour
         }
         else if (language == Language.Cn)
         {
-            _textMP.font = _fontAssetChina;          
+            _textMP.font = _fontAssetChina;
+            _textMP.fontSize = _fontSizeDefault;
             _textMP.text = dictionary[(byte)language];
-            _textMP.enableWordWrapping = false;
+            _textMP.enableWordWrapping = _isWrapForCnJp;
         }
         else
         {
             _textMP.font = _fontAssetJapan;
+            _textMP.fontSize = _fontSizeDefault + 5.0f;
             _textMP.text = dictionary[(byte)language];
-            _textMP.enableWordWrapping = false;
+            _textMP.enableWordWrapping = _isWrapForCnJp;
         }
     }
 }

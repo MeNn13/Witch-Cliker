@@ -95,7 +95,7 @@ public class GameInfo
         }
         set
         {
-            if (value < 1 || value > 10)
+            if (value < 1 || value > 5)
                 level = 1;
             else
                 level = value;
@@ -117,15 +117,18 @@ public class Progress : MonoBehaviour
 
     public static Progress Instance;
 
+    public ulong many;
+
     private void Awake()
     {
+        //GameInfo.Score = many;
+
         if (Instance == null)
         {
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            //Load();
-            LoadExtern();
+            LoadExtern();        
         }
         else
             Destroy(gameObject);
@@ -133,9 +136,10 @@ public class Progress : MonoBehaviour
 
     public void Save()
     {
+#if UNITY_WEBGL
         string jsonString1 = JsonConvert.SerializeObject(GameInfo);
-        //PlayerPrefs.SetString("GameData", jsonString1);
         SaveExtern(jsonString1);
+#endif
     }
 
     public void Load()

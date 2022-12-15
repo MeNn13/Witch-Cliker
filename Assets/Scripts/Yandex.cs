@@ -17,7 +17,7 @@ public class Yandex : MonoBehaviour
     private static extern void ShowFullAd();
 
     public void Start()
-    {
+    { 
         ShowFullAd();
         GetPlayerData();
     }

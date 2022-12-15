@@ -15,11 +15,11 @@ public class Level : MonoBehaviour
 
     public void LevelUp()
     {
-        OnLevelUp?.Invoke();
-
         Progress.Instance.GameInfo.Level++;
 
         _levelText.text = "Level " + Progress.Instance.GameInfo.Level;
+
+        OnLevelUp?.Invoke();
 
         Progress.Instance.Save();
     }

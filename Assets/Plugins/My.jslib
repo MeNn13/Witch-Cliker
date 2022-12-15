@@ -36,13 +36,14 @@ mergeInto(LibraryManager.library, {
             callbacks: {
                 onOpen: () => {
                   console.log('Video ad open.');
+                  myGameInstance.SendMessage("ADS", "StopGame");
                 },
                 onRewarded: () => {
-                  console.log('Rewarded!');
-                  myGameInstance.SendMessage("ADS", "MultiplierClicks");
+                  console.log('Rewarded!');               
                 },
                 onClose: () => {
                   console.log('Video ad closed.');
+                  myGameInstance.SendMessage("ADS", "MultiplierClicks");
                 }, 
                 onError: (e) => {
                   console.log('Error while open video ad:', e);

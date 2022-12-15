@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ADS : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ADS : MonoBehaviour
 
     private void Start()
     {       
-        _currentActiveTime = random.Next(60, 120);
+        _currentActiveTime = random.Next(30, 60);
     }
 
     private void Update()
@@ -40,7 +41,7 @@ public class ADS : MonoBehaviour
             {
                 UnAdsMultiplier?.Invoke();
                 _isPlaying = false;
-                _currentActiveTime = random.Next(60, 120);
+                _currentActiveTime = random.Next(30, 60);
                 _currentPlayingTime = 30.0f;
                 _isActive = true;
             }
@@ -53,10 +54,16 @@ public class ADS : MonoBehaviour
         ShowAdsExtern();
     }
 
+    public void StopGame()
+    {
+        Time.timeScale = 0;
+    }
+
     public void MultiplierClicks()
     {
         OnAdsMultiplier?.Invoke();
         _ads.SetActive(false);
         _isPlaying = true;
+        Time.timeScale = 1;
     }
 }

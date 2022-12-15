@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 43e5efc73de36504d9744b9c1cbe72bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - skinnedMesh: {instanceID: 0}
+  - _enemyMan: {fileID: -486228982906219664, guid: ce41ed363dd63304b9094d25c7818d62, type: 3}
+  - _enemyWoman: {fileID: 6283762245788480944, guid: bb40565181786aa4cb62d6fcd6ac7957, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
