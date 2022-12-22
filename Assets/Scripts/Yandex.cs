@@ -1,42 +1,36 @@
-using System.Collections;
+using System;
 using System.Runtime.InteropServices;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class Yandex : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _nickTMP;
-    [SerializeField] private RawImage _avatar;
-
-    [DllImport("__Internal")]
-    private static extern void GetPlayerData();
+    public static Action OnAuth;
+    public static Action OnRejection;
 
     [DllImport("__Internal")]
     private static extern void ShowFullAd();
 
+    [DllImport("__Internal")]
+    private static extern void AuthExtern();
+
     public void Start()
-    { 
+    {
         ShowFullAd();
-        GetPlayerData();
     }
 
-    public void SetName(string name) => _nickTMP.text = name;
-
-    public void SetAvatar(string url)
+    public void Auth()
     {
-        StartCoroutine(DownloadImage(url));
+        AuthExtern();    
     }
 
-    IEnumerator DownloadImage(string mediaUrl)
+    public void AuthEnter()
     {
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(mediaUrl);
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-            Debug.Log(request.error);
-        else
-            _avatar.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+       // OnAuth?.Invoke();
     }
+
+    public void Rejection()
+    {
+        OnRejection?.Invoke();
+    }
+
 }

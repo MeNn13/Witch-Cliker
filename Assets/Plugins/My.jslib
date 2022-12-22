@@ -31,6 +31,10 @@ mergeInto(LibraryManager.library, {
         })
     },
 
+    AuthExtern: function () {
+      auth();
+    },
+
     ShowAdsExtern: function(){
         ysdk.adv.showRewardedVideo({
             callbacks: {

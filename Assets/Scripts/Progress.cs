@@ -112,23 +112,19 @@ public class Progress : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void SaveExtern(string data);
 
-    [DllImport("__Internal")]
-    private static extern void LoadExtern();
+    //[DllImport("__Internal")]
+    //private static extern void LoadExtern();
 
     public static Progress Instance;
 
-    public ulong many;
-
-    private void Awake()
+    private void Start()
     {
-        //GameInfo.Score = many;
-
         if (Instance == null)
         {
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            LoadExtern();        
+            Load();
         }
         else
             Destroy(gameObject);
@@ -136,20 +132,28 @@ public class Progress : MonoBehaviour
 
     public void Save()
     {
-#if UNITY_WEBGL
         string jsonString1 = JsonConvert.SerializeObject(GameInfo);
-        SaveExtern(jsonString1);
-#endif
+        PlayerPrefs.SetString("GameData", jsonString1);
+       // SaveExtern(jsonString1);
     }
 
     public void Load()
     {
-        //GameInfo = JsonUtility.FromJson<GameInfo>(PlayerPrefs.GetString("GameData"));
-        GameInfo = JsonConvert.DeserializeObject<GameInfo>(PlayerPrefs.GetString("GameData"));
+        GameInfo data = JsonConvert.DeserializeObject<GameInfo>(PlayerPrefs.GetString("GameData"));
+
+        if (data == null)
+            data = GameInfo;
+        else
+            GameInfo = data;
     }
 
     public void SetDataInfo(string value)
     {
-        GameInfo = JsonConvert.DeserializeObject<GameInfo>(value);
+        GameInfo data = JsonConvert.DeserializeObject<GameInfo>(value);
+
+        if (data == null)
+            data = GameInfo;
+        else
+            GameInfo = data;
     }
 }
